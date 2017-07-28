@@ -1,0 +1,81 @@
+
+; 日志目录路径
+log_path =
+
+;;;;;;;;;;;;;;;;;;;
+; Alarm Settings ;
+;;;;;;;;;;;;;;;;;;;
+[alarm]
+; 报警方式
+type = email
+; 报警邮件发送地址
+email = XXXXXXX@139.com
+; 报警邮件抄送地址，多个以英文逗号隔开
+email.carbon_copy = XXXXXX@139.com
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+; Application Settings ;
+;;;;;;;;;;;;;;;;;;;;;;;;
+[mysql]
+; mysql 的 bin 目录位置
+bin_path = /usr/local/mysql/bin/
+;
+; 数据库链接地址、端口、用户名及密码
+;host = 127.0.0.1
+;port = 3306
+sock = /tmp/percona.sock
+
+; 数据库用户名及密码
+; 对于 Mysql 5.2+ 以上版本直接在命令行中使用密码会显示警告
+;  Warning: Using a password on the command line interface can be insecure.
+;
+; 建议在数据库配置文件 my.cnf 中设置：
+;  [mysqldump]
+;  user     = mysqlbackuper
+;  password = mysqlbackuper
+;
+user = mysqlbackuper
+password = mysqlbackuper
+
+; 忽略的数据库表，默认会主动忽悠以下数据库表：
+;  information_schema, performance_schema, test, mysql
+igonre_tables =
+
+;;;;;;;;;;;;;;;;;;;
+; Backup Settings ;
+;;;;;;;;;;;;;;;;;;;
+[backup]
+; 最大保留备份天数
+keep_day = 15
+; 备份目录
+path = /home/backuper
+
+; 备份使用的用户和组
+user = backuper
+user_group = backuper
+
+; 是否启用远程，默认为 true
+;   true, 表示启用。则自动创建同步目录及压缩同步文件
+;   false, 表示禁用。仅有在设置为 false 时，才是禁用
+remote_sync = false
+
+;;;;;;;;;;;;;;;;;;;
+; Handle Settings ;
+;;;;;;;;;;;;;;;;;;;
+[handle]
+
+;;;;;;;;;;;;;;;;;;;
+; Monitor Settings ;
+;;;;;;;;;;;;;;;;;;;
+[monitor]
+disk.type = daliy
+
+performance.type = hour
+
+[remote]
+host =
+user =
+port =
+password =
+identity_file =
+sync_path = /home/backuper/sync
